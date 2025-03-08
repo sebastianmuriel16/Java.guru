@@ -1,0 +1,140 @@
+package course.spring.spring_6_rest_mvc.services;
+
+import ch.qos.logback.core.util.StringUtil;
+import course.spring.spring_6_rest_mvc.model.Beer;
+import course.spring.spring_6_rest_mvc.model.BeerStyle;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.*;
+
+@Slf4j
+@Service
+public class BeerServiceImpl implements BeerService {
+
+    private Map<UUID,Beer> beerMap;
+
+    public BeerServiceImpl(){
+        this.beerMap = new HashMap<>();
+
+        Beer beer1 = Beer.builder()
+                .id(UUID.randomUUID())
+                .beerName("Galaxy Cat")
+                .version(1)
+                .beerStyle(BeerStyle.PALE_ALE)
+                .upc("223432")
+                .price(new BigDecimal("12.99"))
+                .quantityOnHand(122)
+                .createdDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
+                .build();
+
+        Beer beer2 = Beer.builder()
+                .id(UUID.randomUUID())
+                .beerName("Hazy IPA")
+                .version(1)
+                .beerStyle(BeerStyle.IPA)
+                .upc("223433")
+                .price(new BigDecimal("14.50"))
+                .quantityOnHand(200)
+                .createdDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
+                .build();
+
+        Beer beer3 = Beer.builder()
+                .id(UUID.randomUUID())
+                .beerName("Mango Tango")
+                .version(1)
+                .beerStyle(BeerStyle.PALE_ALE)
+                .upc("223434")
+                .price(new BigDecimal("10.99"))
+                .quantityOnHand(150)
+                .createdDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
+                .build();
+
+        beerMap.put(beer1.getId(),beer1);
+        beerMap.put(beer2.getId(),beer2);
+        beerMap.put(beer3.getId(),beer3);
+
+    }
+
+    @Override
+    public List<Beer> listBeers(){
+        return new ArrayList<>(beerMap.values());
+    }
+
+
+
+    @Override
+    public Beer getBeerById(UUID id) {
+
+        log.debug("Get Beer by Id - in service. Id: " + id.toString());
+        return beerMap.get(id);
+    }
+
+    @Override
+    public Beer saveNewBeer(Beer beer) {
+
+        Beer savedBeer = Beer.builder().
+                id(UUID.randomUUID())
+                .beerName(beer.getBeerName())
+                .version(beer.getVersion())
+                .beerStyle(beer.getBeerStyle())
+                .upc(beer.getUpc())
+                .price(beer.getPrice())
+                .quantityOnHand(beer.getQuantityOnHand())
+                .createdDate(LocalDateTime.now())
+                .updateDate(LocalDateTime.now())
+                .build();
+        beerMap.put(savedBeer.getId(),savedBeer);
+        return savedBeer;
+    }
+
+    @Override
+    public void updateBeerById(UUID id, Beer beer) {
+        Beer existing = beerMap.get(id);
+        existing.setBeerName(beer.getBeerName());
+        existing.setBeerStyle(beer.getBeerStyle());
+        existing.setPrice(beer.getPrice());
+        existing.setUpc(beer.getUpc());
+        existing.setQuantityOnHand(beer.getQuantityOnHand());
+
+        beerMap.put(existing.getId(),existing);
+    }
+
+    @Override
+    public void deleteBeerById(UUID beerId) {
+        beerMap.remove(beerId);
+    }
+
+    @Override
+    public void patchBeerById(UUID beerid,Beer beer) {
+        Beer existing = beerMap.get(beerid);
+
+        if(StringUtils.hasText(beer.getBeerName())){
+            existing.setBeerName(beer.getBeerName());
+        }
+        if(beer.getBeerStyle() !=null){
+            existing.setBeerStyle(beer.getBeerStyle());
+        }
+        if(beer.getPrice() != null){
+            existing.setPrice(beer.getPrice());
+        }
+        if(StringUtils.hasText(beer.getUpc())){
+            existing.setUpc(beer.getUpc());
+        }
+        if(beer.getQuantityOnHand()!= null){
+            existing.setQuantityOnHand(beer.getQuantityOnHand());
+        }
+
+        
+    }
+
+
+}
