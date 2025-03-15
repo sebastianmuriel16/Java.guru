@@ -2,19 +2,19 @@ package course.spring.spring_6_rest_mvc.services;
 
 import java.util.List;
 import java.util.UUID;
-import course.spring.spring_6_rest_mvc.model.Beer;
+import course.spring.spring_6_rest_mvc.model.BeerDTO;
 
 public interface BeerService {
 
-    List<Beer> listBeers();
+    List<BeerDTO> listBeers();
 
-    Beer getBeerById(UUID id);
+    BeerDTO getBeerById(UUID id);
 
-    Beer saveNewBeer(Beer beer);
+    BeerDTO saveNewBeer(BeerDTO beer);
 
-    void updateBeerById(UUID id,Beer beer);
+    void updateBeerById(UUID id, BeerDTO beer);
 
     void deleteBeerById(UUID beerId);
 
-    void patchBeerById(UUID beerId,Beer beer);
+    void patchBeerById(UUID beerId, BeerDTO beer);
 }
