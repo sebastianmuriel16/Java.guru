@@ -1,14 +1,17 @@
 package course.spring.spring_6_rest_mvc.services;
 
 import course.spring.spring_6_rest_mvc.model.CustomerDTO;
+
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public interface CustomerService {
 
     List<CustomerDTO> listCustomers();
 
-    CustomerDTO getCustomerById(UUID id);
+    Optional<CustomerDTO> getCustomerById(UUID id);
 
     CustomerDTO saveNewCustomer(CustomerDTO customer);
 
