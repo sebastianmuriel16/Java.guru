@@ -28,7 +28,10 @@ public class CustomerController {
 
     @DeleteMapping("{customerId}")
     public ResponseEntity deleteCustomerById(@PathVariable("customerId") UUID customerId){
-        customerService.deleteCustomerByid(customerId);
+
+        if(!customerService.deleteCustomerByid(customerId)){
+            throw new NotFoundException();
+        }
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
@@ -44,13 +47,15 @@ public class CustomerController {
 
         HttpHeaders headers = new HttpHeaders();
 
-        headers.add("Location","api/v1/customer/" + savedCustomer.getId().toString());
+        headers.add("Location","/api/v1/customer/" + savedCustomer.getId().toString());
 
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
     @PutMapping("{customerId}")
     public ResponseEntity updateCustomerById(@PathVariable("customerId") UUID id,@RequestBody CustomerDTO customer){
-        customerService.updateCustomerById(id,customer);
+       if( customerService.updateCustomerById(id,customer).isEmpty()){
+           throw new NotFoundException();
+       };
 
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
