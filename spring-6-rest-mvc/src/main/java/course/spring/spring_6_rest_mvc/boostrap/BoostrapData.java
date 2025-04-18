@@ -79,19 +79,19 @@ public class BoostrapData implements CommandLineRunner {
             Customer customer1 = Customer.builder()
                     .customerName("John Doe")
                     .createdDate(LocalDateTime.now())
-                    .lastModifiedDate(LocalDateTime.now())
+                    .updateDate(LocalDateTime.now())
                     .build();
 
             Customer customer2 = Customer.builder()
                     .customerName("Jane Smith")
                     .createdDate(LocalDateTime.now().minusDays(10))
-                    .lastModifiedDate(LocalDateTime.now().minusDays(5))
+                    .updateDate(LocalDateTime.now().minusDays(5))
                     .build();
 
             Customer customer3 = Customer.builder()
                     .customerName("Alice Johnson")
                     .createdDate(LocalDateTime.now().minusMonths(2))
-                    .lastModifiedDate(LocalDateTime.now().minusDays(2))
+                    .updateDate(LocalDateTime.now().minusDays(2))
                     .build();
 
             customerRepository.saveAll(Arrays.asList(customer1,customer2,customer3));

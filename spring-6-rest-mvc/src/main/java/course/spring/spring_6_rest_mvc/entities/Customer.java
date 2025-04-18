@@ -30,11 +30,14 @@ public class Customer {
     @NotNull
     @NotBlank
     @Size(max = 50)
-    @Column(length = 50)
+    @Column(name = "name",length = 50)
     private String customerName;
+
+    @Column(length = 255)
+    private String email;
 
     @Version
     private Integer version;
     private LocalDateTime createdDate;
-    private LocalDateTime lastModifiedDate;
+    private LocalDateTime updateDate;
 }
