@@ -3,6 +3,7 @@ package course.spring.spring_6_rest_mvc.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course.spring.spring_6_rest_mvc.entities.Beer;
 import course.spring.spring_6_rest_mvc.mappers.BeerMapper;
+import course.spring.spring_6_rest_mvc.model.BeerCSVRecord;
 import course.spring.spring_6_rest_mvc.model.BeerDTO;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 import jakarta.transaction.Transactional;
@@ -10,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import static org.hamcrest.core.Is.is;
 import org.springframework.http.HttpStatusCode;
@@ -21,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+
 
 import java.util.HashMap;
 import java.util.List;
@@ -151,7 +154,7 @@ class BeerControllerIT {
     void testListBeers() {
         List<BeerDTO> dtos = beerController.listBeers();
 
-        assertThat(dtos.size()).isEqualTo(3);
+        assertThat(dtos.size()).isEqualTo(2413);
     }
 
     @Test
@@ -181,5 +184,6 @@ class BeerControllerIT {
         assertThat(dtos.size()).isEqualTo(0);
 
     }
+
 
 }
