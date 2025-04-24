@@ -3,13 +3,13 @@ package course.spring.spring_6_rest_mvc.services;
 import course.spring.spring_6_rest_mvc.entities.Beer;
 import course.spring.spring_6_rest_mvc.mappers.BeerMapper;
 import course.spring.spring_6_rest_mvc.model.BeerDTO;
+import course.spring.spring_6_rest_mvc.model.BeerStyle;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,20 +25,38 @@ public class BeerServiceJPA implements BeerService {
     private final BeerMapper beerMapper;
 
     List<Beer> listBeersByName(String beerName){
-        return new ArrayList<>();
+        return beerRepository.findByBeerNameContainingIgnoreCase(beerName);
+    }
+
+    List<Beer> listBeersByStyle(BeerStyle beerStyle){
+        return beerRepository.findAllByBeerStyle(beerStyle);
+    }
+
+    List<Beer> listBeersByNameAndStyle(String beerName, BeerStyle beerStyle){
+        return beerRepository.findByBeerNameContainingIgnoreCaseAndBeerStyle(beerName,beerStyle);
     }
 
     @Override
-    public List<BeerDTO> listBeers(String beerName) {
+    public List<BeerDTO> listBeers(String beerName, BeerStyle beerStyle, Boolean showInventory) {
 
         List<Beer> beerList;
 
-        if(StringUtils.hasText(beerName)){
+        if(StringUtils.hasText(beerName) && beerStyle== null){
             beerList = listBeersByName(beerName);
+
+        } else if (!StringUtils.hasText(beerName) && beerStyle != null) {
+            beerList = listBeersByStyle(beerStyle);
         }
-        else {
+        else if (StringUtils.hasText(beerName) && beerStyle != null){
+            beerList = listBeersByNameAndStyle(beerName,beerStyle);
+        } else {
             beerList = beerRepository.findAll();
         }
+
+        if(showInventory !=null && !showInventory){
+            beerList.forEach(beer -> beer.setQuantityOnHand(null));
+        }
+
         return beerList
                 .stream()
                 .map(beerMapper::beerToBeerDto)

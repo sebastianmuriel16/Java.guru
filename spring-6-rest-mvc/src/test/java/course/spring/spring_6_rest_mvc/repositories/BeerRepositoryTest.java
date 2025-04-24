@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -33,9 +34,16 @@ class BeerRepositoryTest {
 
     @Test
     void testGetBeerListByName(){
-        List<Beer> list = beerRepository.findAllByBeerNameContaining("IPA");
+        List<Beer> list = beerRepository.findByBeerNameContainingIgnoreCase("IPA");
 
         assertThat(list.size()).isEqualTo(337);
+    }
+
+    @Test
+    void testGetBeerListByNameAndBeerStyle(){
+        List<Beer> list = beerRepository.findByBeerNameContainingIgnoreCaseAndBeerStyle("IPA",BeerStyle.IPA);
+
+        assertThat(list.size()).isEqualTo(311);
     }
 
     @Test
