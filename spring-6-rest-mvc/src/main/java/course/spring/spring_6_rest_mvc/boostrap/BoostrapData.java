@@ -36,7 +36,7 @@ public class BoostrapData implements CommandLineRunner {
 
         loadBeerData();
         loadCsvData();
-        LoadCustomerData();
+        loadCustomerData();
 
     }
 
@@ -74,7 +74,7 @@ public class BoostrapData implements CommandLineRunner {
 
     }
 
-    private void LoadCustomerData() {
+    private void loadBeerData() {
 
         if(beerRepository.count() == 0){
             Beer beer1 = Beer.builder()
@@ -107,16 +107,14 @@ public class BoostrapData implements CommandLineRunner {
                     .updateDate(LocalDateTime.now())
                     .build();
 
-            beerRepository.save(beer1);
-            beerRepository.save(beer2);
-            beerRepository.save(beer3);
+            beerRepository.saveAll(Arrays.asList(beer1,beer2,beer3));
 
         }
 
 
     }
 
-    private void loadBeerData() {
+    private void loadCustomerData() {
 
         if(customerRepository.count() == 0){
 

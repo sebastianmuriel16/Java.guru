@@ -7,7 +7,7 @@ import course.spring.spring_6_rest_mvc.model.BeerDTO;
 
 public interface BeerService {
 
-    List<BeerDTO> listBeers();
+    List<BeerDTO> listBeers(String beerName);
 
     Optional<BeerDTO> getBeerById(UUID id);
 

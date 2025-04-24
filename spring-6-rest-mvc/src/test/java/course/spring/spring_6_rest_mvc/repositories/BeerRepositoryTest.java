@@ -1,24 +1,42 @@
 package course.spring.spring_6_rest_mvc.repositories;
 
+import course.spring.spring_6_rest_mvc.boostrap.BoostrapData;
 import course.spring.spring_6_rest_mvc.entities.Beer;
+import course.spring.spring_6_rest_mvc.model.BeerCSVRecord;
 import course.spring.spring_6_rest_mvc.model.BeerStyle;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 
+import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
+//@Import({BoostrapData.class, BeerCSVRecord.class})
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@ActiveProfiles("localmysql")
 class BeerRepositoryTest {
 
     @Autowired
     BeerRepository beerRepository;
+
+
+    @Test
+    void testGetBeerListByName(){
+        List<Beer> list = beerRepository.findAllByBeerNameContaining("IPA");
+
+        assertThat(list.size()).isEqualTo(337);
+    }
 
     @Test
     void testSaveBeerNameTooLong() {
