@@ -1,15 +1,13 @@
 package course.spring.spring_6_rest_mvc.repositories;
 
-import course.spring.spring_6_rest_mvc.boostrap.BoostrapData;
 import course.spring.spring_6_rest_mvc.entities.Beer;
-import course.spring.spring_6_rest_mvc.model.BeerCSVRecord;
 import course.spring.spring_6_rest_mvc.model.BeerStyle;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
 import org.springframework.test.context.ActiveProfiles;
 
 
@@ -19,7 +17,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -34,16 +31,16 @@ class BeerRepositoryTest {
 
     @Test
     void testGetBeerListByName(){
-        List<Beer> list = beerRepository.findByBeerNameContainingIgnoreCase("IPA");
+        Page<Beer> list = beerRepository.findByBeerNameContainingIgnoreCase("IPA", null);
 
-        assertThat(list.size()).isEqualTo(337);
+        assertThat(list.getContent().size()).isEqualTo(337);
     }
 
     @Test
     void testGetBeerListByNameAndBeerStyle(){
-        List<Beer> list = beerRepository.findByBeerNameContainingIgnoreCaseAndBeerStyle("IPA",BeerStyle.IPA);
+        Page<Beer> list = beerRepository.findByBeerNameContainingIgnoreCaseAndBeerStyle("IPA",BeerStyle.IPA, null);
 
-        assertThat(list.size()).isEqualTo(311);
+        assertThat(list.getContent().size()).isEqualTo(311);
     }
 
     @Test
