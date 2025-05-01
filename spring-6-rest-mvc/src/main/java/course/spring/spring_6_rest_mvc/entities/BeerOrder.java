@@ -1,10 +1,7 @@
 package course.spring.spring_6_rest_mvc.entities;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -12,13 +9,26 @@ import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import java.sql.Timestamp;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@Builder
 public class BeerOrder {
+
+    public BeerOrder(UUID id, Long version, Timestamp createdDate, Timestamp lastModifiedDate, String customerRef, Customer customer, Set<BeerOrderLine> beerOrderLines) {
+        this.id = id;
+        this.version = version;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+        this.customerRef = customerRef;
+        this.setCustomer(customer);
+        this.beerOrderLines = beerOrderLines;
+    }
+
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -44,4 +54,11 @@ public class BeerOrder {
     @ManyToOne
     private Customer customer;
 
+    public void setCustomer(Customer customer){
+        this.customer = customer;
+        customer.getBeerOrders().add(this);
+    }
+
+    @OneToMany(mappedBy = "beerOrder")
+    private Set<BeerOrderLine> beerOrderLines;
 }
