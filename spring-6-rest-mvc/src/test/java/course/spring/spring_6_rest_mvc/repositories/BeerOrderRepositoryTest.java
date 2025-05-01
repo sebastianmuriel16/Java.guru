@@ -2,6 +2,7 @@ package course.spring.spring_6_rest_mvc.repositories;
 
 import course.spring.spring_6_rest_mvc.entities.Beer;
 import course.spring.spring_6_rest_mvc.entities.BeerOrder;
+import course.spring.spring_6_rest_mvc.entities.BeerOrderShipment;
 import course.spring.spring_6_rest_mvc.entities.Customer;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,12 +38,14 @@ class BeerOrderRepositoryTest {
     void testBeerOrders(){
         BeerOrder beerOrder = BeerOrder.builder()
                 .customerRef("test Customer")
+                .beerOrderShipment(BeerOrderShipment.builder()
+                        .trackingNumber("12345r")
+                        .build())
                 .customer(testCustomer)
                 .build();
 
         BeerOrder savedBeerOrder = beerOrderRepository.save(beerOrder);
         System.out.println(savedBeerOrder.getCustomerRef());
-        System.out.println("customer:" + savedBeerOrder.getCustomer().toString());
     }
 
 }
