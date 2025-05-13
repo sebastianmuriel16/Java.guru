@@ -1,6 +1,7 @@
 package course.spring.spring_6_rest_mvc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import course.spring.spring_6_rest_mvc.config.SpringSecConfig;
 import course.spring.spring_6_rest_mvc.model.BeerDTO;
 import course.spring.spring_6_rest_mvc.services.BeerService;
 import course.spring.spring_6_rest_mvc.services.BeerServiceImpl;
@@ -10,6 +11,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -28,12 +30,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.mockito.Mockito.verify;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 //@SpringBootTest
 @WebMvcTest(BeerController.class)
+@Import(SpringSecConfig.class)
 class BeerControllerTest {
 
 
@@ -164,6 +168,7 @@ class BeerControllerTest {
                 false, 1, 25).getContent().get(1));
 
         MvcResult mvcResult = mockMvc.perform(post(BeerController.BEER_PATH)
+                        .with(httpBasic("user1","123456"))
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(beerDTO)))
@@ -181,7 +186,8 @@ class BeerControllerTest {
                 null, false, null, null));
 
         mockMvc.perform(get(BeerController.BEER_PATH)
-                        .accept(MediaType.APPLICATION_JSON))
+                 .with(httpBasic("user1","123456"))
+                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.content.length()", is(3)));
