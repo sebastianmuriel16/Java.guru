@@ -79,6 +79,7 @@
 
             server.expect(method(HttpMethod.GET))
                     .andExpect(requestTo(uri))
+                    .andExpect(header("Authorization","Basic dXNlcjE6MTIzNDU2"))
                     .andExpect(queryParam("beerName","ALE"))
                     .andRespond(withSuccess(response,MediaType.APPLICATION_JSON));
 
