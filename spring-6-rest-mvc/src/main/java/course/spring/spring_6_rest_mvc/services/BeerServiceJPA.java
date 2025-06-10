@@ -105,13 +105,11 @@ public class BeerServiceJPA implements BeerService {
     }
 
     @Override
-    public BeerDTO saveNewBeer(BeerDTO beer) {
+    public BeerDTO saveNewBeer(BeerDTO beerDTO) {
 
-        Beer beerDtoToEntity = beerMapper.beerDtoToBeer(beer);
-        beerRepository.save(beerDtoToEntity);
-        BeerDTO beerEntityToDto = beerMapper.beerToBeerDto(beerDtoToEntity);
-
-        return beerEntityToDto;
+       Beer beer = beerMapper.beerDtoToBeer(beerDTO);
+       Beer savedBeer = beerRepository.save(beer);
+       return beerMapper.beerToBeerDto(savedBeer);
     }
 
     @Override
