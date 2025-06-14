@@ -24,7 +24,7 @@ public class BeerDTO {
     private String beerName;
 
     @NotBlank
-    @Size(max = 255,min = 5)
+    @Size(max = 255)
     private String beerStyle;
 
     @Size(max = 25)
