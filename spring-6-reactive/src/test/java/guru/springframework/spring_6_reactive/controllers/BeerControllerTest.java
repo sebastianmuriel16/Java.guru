@@ -1,6 +1,7 @@
 package guru.springframework.spring_6_reactive.controllers;
 
 
+import guru.springframework.spring_6_reactive.domain.Beer;
 import guru.springframework.spring_6_reactive.model.BeerDTO;
 import guru.springframework.spring_6_reactive.repositories.BeerRepositoryTest;
 import org.junit.jupiter.api.MethodOrderer;
@@ -24,11 +25,53 @@ class BeerControllerTest {
     WebTestClient webTestClient;
 
     @Test
-    @Order(5)
+    @Order(99)
     void testDeleteBeer(){
         webTestClient.delete().uri(BeerController.BEER_PATH_ID,1)
                 .exchange()
                 .expectStatus().isNoContent();
+    }
+
+    @Test
+    void testDeleteBeerNotFound(){
+        webTestClient.delete().uri(BeerController.BEER_PATH_ID,99)
+                .exchange()
+                .expectStatus().isNotFound();
+    }
+
+    @Test
+    @Order(10)
+    void testPatchBeerNotFound(){
+        webTestClient.patch().uri(BeerController.BEER_PATH_ID,43)
+                .body(Mono.just(BeerRepositoryTest.getTestBeer()),BeerDTO.class)
+                .header("Content-Type", "application/json")
+                .exchange()
+                .expectStatus().isNotFound();
+    }
+
+    @Test
+    @Order(7)
+    void testUpadteBeerBadData() {
+
+        Beer beer = BeerRepositoryTest.getTestBeer();
+        beer.setBeerName("");
+
+        webTestClient.put().uri(BeerController.BEER_PATH_ID,1)
+                .body(Mono.just(beer), BeerDTO.class)
+                .header("Content-Type", "application/json")
+                .exchange()
+                .expectStatus().isBadRequest();
+    }
+
+    @Test
+    @Order(9)
+    void testUpadteBeerNotFound() {
+
+        webTestClient.put().uri(BeerController.BEER_PATH_ID,99)
+                .body(Mono.just(BeerRepositoryTest.getTestBeer()), BeerDTO.class)
+                .header("Content-Type", "application/json")
+                .exchange()
+                .expectStatus().isNotFound();
     }
 
     @Test
@@ -40,6 +83,20 @@ class BeerControllerTest {
                 .header("Content-Type", "application/json")
                 .exchange()
                 .expectStatus().isNoContent();
+    }
+
+    @Test
+    @Order(6)
+    void testCreateBeerBadData() {
+
+        Beer beer = BeerRepositoryTest.getTestBeer();
+        beer.setBeerName("");
+
+        webTestClient.post().uri(BeerController.BEER_PATH)
+                .body(Mono.just(beer), BeerDTO.class)
+                .header("Content-Type", "application/json")
+                .exchange()
+                .expectStatus().isBadRequest();
     }
 
     @Test
@@ -62,6 +119,14 @@ class BeerControllerTest {
                 .expectStatus().isOk()
                 .expectHeader().valueEquals("Content-type","application/json")
                 .expectBody(BeerDTO.class);
+    }
+
+    @Test
+    @Order(8)
+    void testBeerByIdNotFound(){
+        webTestClient.get().uri(BeerController.BEER_PATH_ID,999)
+                .exchange()
+                .expectStatus().isNotFound();
     }
 
     @Test
