@@ -27,7 +27,7 @@ import static org.awaitility.Awaitility.await;
 
 @Testcontainers
 @SpringBootTest
-class IBeerServiceImplTest {
+public class IBeerServiceImplTest {
 
     @Container
     @ServiceConnection
