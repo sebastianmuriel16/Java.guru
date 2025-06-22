@@ -8,6 +8,7 @@ import com.mongodb.reactivestreams.client.MongoClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 
 import static java.util.Collections.singletonList;
 
@@ -15,6 +16,7 @@ import static java.util.Collections.singletonList;
  * Created by jt, Spring Framework Guru.
  */
 //@Configuration
+//@EnableMongoAuditing
 public class MongoConfig extends AbstractReactiveMongoConfiguration {
 
     @Bean
@@ -24,7 +26,7 @@ public class MongoConfig extends AbstractReactiveMongoConfiguration {
 
     @Override
     public String getDatabaseName() {
-        return "sfg";
+        return "reactive_mongo";
     }
 
     @Override

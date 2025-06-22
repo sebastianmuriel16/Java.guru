@@ -2,12 +2,15 @@ package guru.spring_reactive_mongodb.bootstrap;
 
 
 import guru.spring_reactive_mongodb.domain.Beer;
+import guru.spring_reactive_mongodb.domain.Customer;
 import guru.spring_reactive_mongodb.repositories.BeerRepository;
+import guru.spring_reactive_mongodb.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Component
@@ -15,14 +18,28 @@ import java.time.LocalDateTime;
 public class BootstrapData implements CommandLineRunner {
 
     private final BeerRepository beerRepository;
+    private final CustomerRepository customerRepository;
 
     @Override
     public void run(String... args) throws Exception {
-        beerRepository.deleteAll()
-                .doOnSuccess(success -> {
-                    loadBeerData();
-                })
-                .subscribe();
+        beerRepository.count()
+                .subscribe(count ->{
+                    if (count>0){
+                        return;
+                    }
+                    else {
+                        loadBeerData();
+                    }
+                });
+        customerRepository.count()
+                .subscribe(count -> {
+                    if(count>0){
+                        return;
+                    }
+                    else {
+                        loadCustomerData();
+                    }
+                });
     }
 
     private void loadBeerData() {
@@ -66,5 +83,34 @@ public class BootstrapData implements CommandLineRunner {
         }
     });
  };
+    private void loadCustomerData() {
+        customerRepository.count().subscribe(count -> {
+
+            if (count == 0) {
+                Customer customer1 = Customer.builder()
+                        .customerName("John Doe")
+                        .createdDate(LocalDateTime.now())
+                        .lastModifiedDate(LocalDateTime.now())
+                        .build();
+
+                Customer customer2 = Customer.builder()
+                        .customerName("Jane Smith")
+                        .createdDate(LocalDateTime.now())
+                        .lastModifiedDate(LocalDateTime.now())
+                        .build();
+
+                Customer customer3 = Customer.builder()
+                        .customerName("Alice Johnson")
+                        .createdDate(LocalDateTime.now())
+                        .lastModifiedDate(LocalDateTime.now())
+                        .build();
+
+                customerRepository.save(customer1).subscribe();
+                customerRepository.save(customer2).subscribe();
+                customerRepository.save(customer3).subscribe();
+            }
+
+        });
+    }
 
 }
