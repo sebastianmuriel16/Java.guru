@@ -12,9 +12,9 @@ import java.time.LocalDate;
 
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class BeerDTO {
 
     private Integer id;

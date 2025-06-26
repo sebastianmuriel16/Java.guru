@@ -68,17 +68,26 @@ public class BootStrapData implements CommandLineRunner {
                         .createdDate(LocalDate.now())
                         .lastModifiedDate(LocalDate.now())
                         .build();
-                Beer beer4 = Beer.builder()
-                        .beerName("Galaxy avengers")
-                        .beerStyle("PALE ALE")
-                        .upc("223434111")
-                        .price(new BigDecimal("16.99"))
-                        .quantityOnHand(170)
+                    Beer beer4 = Beer.builder()
+                            .beerName("Galaxy avengers")
+                            .beerStyle("PALE ALE")
+                            .upc("223434111")
+                            .price(new BigDecimal("16.99"))
+                            .quantityOnHand(170)
+                            .createdDate(LocalDate.now())
+                            .lastModifiedDate(LocalDate.now())
+                            .build();
+                Beer beer5 = Beer.builder()
+                        .beerName("Tropical Storm")
+                        .beerStyle("SESSION IPA")
+                        .upc("223435")
+                        .price(new BigDecimal("11.49"))
+                        .quantityOnHand(135)
                         .createdDate(LocalDate.now())
                         .lastModifiedDate(LocalDate.now())
                         .build();
 
-                beerRepository.saveAll(Arrays.asList(beer1, beer2, beer3,beer4)).subscribe();
+                beerRepository.saveAll(Arrays.asList(beer1, beer2, beer3,beer4,beer5)).subscribe();
             }
         });
 

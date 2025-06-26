@@ -1,5 +1,7 @@
 package guru.springframework.spring_6_reactive.controllers;
 
+
+import guru.springframework.spring_6_reactive.domain.Beer;
 import guru.springframework.spring_6_reactive.model.BeerDTO;
 import guru.springframework.spring_6_reactive.services.BeerService;
 import jakarta.validation.Valid;

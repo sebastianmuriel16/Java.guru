@@ -1,5 +1,6 @@
 package guru.springframework.spring_6_reactive.services;
 
+import guru.springframework.spring_6_reactive.domain.Beer;
 import guru.springframework.spring_6_reactive.mappers.BeerMapper;
 import guru.springframework.spring_6_reactive.model.BeerDTO;
 import guru.springframework.spring_6_reactive.repositories.BeerRepository;
