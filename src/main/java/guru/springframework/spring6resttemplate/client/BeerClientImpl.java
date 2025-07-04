@@ -4,25 +4,29 @@ import com.fasterxml.jackson.databind.JsonNode;
 import guru.springframework.spring6resttemplate.model.BeerDTO;
 import guru.springframework.spring6resttemplate.model.BeerDTOPageImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Map;
 import java.util.UUID;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class BeerClientImpl implements BeerClient {
 
     private final RestTemplateBuilder restTemplateBuilder;
     public static final String GET_BEER_PATH = "/api/v1/beer";
     public static final String GET_BEER_BY_ID = "/api/v1/beer/{beerId}";
+
+
+
+
 
     @Override
     public void deleteBeer(UUID beerId){
@@ -38,6 +42,7 @@ public class BeerClientImpl implements BeerClient {
 
         return getBeerById(beerDTO.getId());
     }
+
 
 
     @Override
@@ -98,7 +103,7 @@ public class BeerClientImpl implements BeerClient {
 //                        .elements().forEachRemaining(node ->{
 //                        System.out.println(node.get("beerName").asText());
 //                });
-//
+
     //    System.out.println(stringResponse.getBody());
         return response.getBody();
     }

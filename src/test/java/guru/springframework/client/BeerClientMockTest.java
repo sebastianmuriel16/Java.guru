@@ -35,6 +35,7 @@
     import org.springframework.security.oauth2.core.OAuth2AccessToken;
     import org.springframework.test.web.client.MockRestServiceServer;
     import org.springframework.web.client.HttpClientErrorException;
+    import org.springframework.web.client.RestClient;
     import org.springframework.web.client.RestTemplate;
     import org.springframework.web.util.UriComponentsBuilder;
 
@@ -51,7 +52,8 @@
     import static org.springframework.test.web.client.match.MockRestRequestMatchers.*;
     import static org.springframework.test.web.client.response.MockRestResponseCreators.*;
 
-    @RestClientTest
+//    @RestClientTest
+    @SpringBootTest(classes = Spring6ResttemplateApplication.class)
     @Import(RestTemplateBuilderConfig.class)
     public class BeerClientMockTest {
 
@@ -66,7 +68,11 @@
         RestTemplateBuilder restTemplateBuilderConfigured;
 
         @Autowired
+        RestClient.Builder restClientBuilder;
+
+        @Autowired
         ObjectMapper objectMapper;
+
 
         @Mock
         RestTemplateBuilder mockRestTemplateBuilder = new RestTemplateBuilder(new MockServerRestTemplateCustomizer());
@@ -116,9 +122,13 @@
             server = MockRestServiceServer.bindTo(restTemplate).build();
             when(mockRestTemplateBuilder.build()).thenReturn(restTemplate);
             beerClient = new BeerClientImpl(mockRestTemplateBuilder);
+//            beerClient = new BeerClientImpl(RestClient.builder(mockRestTemplateBuilder.build()));
             dto = getBeerDto();
             dtoJson= objectMapper.writeValueAsString(dto);
         }
+
+
+
 
         @Test
         void testListBeersWithQueryParam() throws JsonProcessingException {
