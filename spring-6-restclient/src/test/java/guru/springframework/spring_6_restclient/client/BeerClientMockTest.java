@@ -22,6 +22,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
@@ -126,8 +127,6 @@ public class BeerClientMockTest {
         dto = getBeerDto();
         dtoJson= objectMapper.writeValueAsString(dto);
     }
-
-
 
 
     @Test

@@ -8,6 +8,7 @@ import java.util.UUID;
 public interface BeerClient {
 
 
+
     BeerDTO updateBeer(BeerDTO beerDTO);
 
     BeerDTO createBeer(BeerDTO newDTo);
