@@ -25,9 +25,6 @@ public class BeerClientImpl implements BeerClient {
     public static final String GET_BEER_BY_ID = "/api/v1/beer/{beerId}";
 
 
-
-
-
     @Override
     public void deleteBeer(UUID beerId){
         RestTemplate restTemplate = restTemplateBuilder.build();

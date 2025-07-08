@@ -1,8 +1,8 @@
 package guru.springframework.client;
 
-import guru.springframework.spring6resttemplate.Spring6ResttemplateApplication;
-import guru.springframework.spring6resttemplate.client.BeerClient;
+import guru.springframework.Spring6ResttemplateApplication;
 import guru.springframework.spring6resttemplate.client.BeerClientImpl;
+
 import guru.springframework.spring6resttemplate.model.BeerDTO;
 import guru.springframework.spring6resttemplate.model.BeerStyle;
 import org.junit.jupiter.api.Test;

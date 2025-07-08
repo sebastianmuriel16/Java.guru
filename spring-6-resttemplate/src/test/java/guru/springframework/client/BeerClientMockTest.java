@@ -2,7 +2,7 @@
 
     import com.fasterxml.jackson.core.JsonProcessingException;
     import com.fasterxml.jackson.databind.ObjectMapper;
-    import guru.springframework.spring6resttemplate.Spring6ResttemplateApplication;
+    import guru.springframework.Spring6ResttemplateApplication;
     import guru.springframework.spring6resttemplate.client.BeerClientImpl;
     import guru.springframework.spring6resttemplate.config.OAuthClientInterceptor;
     import guru.springframework.spring6resttemplate.config.RestTemplateBuilderConfig;
@@ -57,7 +57,7 @@
     @Import(RestTemplateBuilderConfig.class)
     public class BeerClientMockTest {
 
-        static final String URL = "http://localhost:8080";
+        static final String URL = "http://localhost:8081";
         public static final String BEARER_TEST = "Bearer test";
 
         BeerClient beerClient;
