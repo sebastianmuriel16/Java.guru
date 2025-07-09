@@ -1,6 +1,7 @@
 package course.spring.spring_6_rest_mvc.services;
 
 import course.spring.spring_6_rest_mvc.entities.Beer;
+import course.spring.spring_6_rest_mvc.events.BeerCreatedEvent;
 import course.spring.spring_6_rest_mvc.mappers.BeerMapper;
 import course.spring.spring_6_rest_mvc.model.BeerDTO;
 import course.spring.spring_6_rest_mvc.model.BeerStyle;
@@ -8,16 +9,20 @@ import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
+import org.springframework.security.core.Authentication;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -34,6 +39,7 @@ public class BeerServiceJPA implements BeerService {
     private final BeerRepository beerRepository;
     private final BeerMapper beerMapper;
     private final CacheManager cacheManager;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     private static final int DEFAULT_PAGE=0;
     private static final int DEFAULT_PAGE_SIZE = 25;
@@ -119,11 +125,23 @@ public class BeerServiceJPA implements BeerService {
 
     @Override
     public BeerDTO saveNewBeer(BeerDTO beerDTO) {
-        cacheManager.getCache("beerListCache").clear();
+       if(cacheManager.getCache("beerListCache") != null){
+           cacheManager.getCache("beerListCache").clear();
+       }
 
-       Beer beer = beerMapper.beerDtoToBeer(beerDTO);
-       Beer savedBeer = beerRepository.save(beer);
-       return beerMapper.beerToBeerDto(savedBeer);
+       val savedBeer = beerRepository.save(beerMapper.beerDtoToBeer(beerDTO));
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        applicationEventPublisher.publishEvent(new BeerCreatedEvent(savedBeer,auth));
+
+        return beerMapper.beerToBeerDto(savedBeer);
+
+
+
+//       Beer beer = beerMapper.beerDtoToBeer(beerDTO);
+//       Beer savedBeer = beerRepository.save(beer);
+//       return beerMapper.beerToBeerDto(savedBeer);
     }
 
     @Override

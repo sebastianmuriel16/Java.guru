@@ -2,11 +2,14 @@ package course.spring.spring_6_rest_mvc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course.spring.spring_6_rest_mvc.entities.Beer;
+import course.spring.spring_6_rest_mvc.events.BeerCreatedEvent;
 import course.spring.spring_6_rest_mvc.mappers.BeerMapper;
 import course.spring.spring_6_rest_mvc.model.BeerDTO;
 import course.spring.spring_6_rest_mvc.model.BeerStyle;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 import jakarta.transaction.Transactional;
+import lombok.val;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.event.ApplicationEvents;
+import org.springframework.test.context.event.RecordApplicationEvents;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -28,6 +33,7 @@ import org.springframework.web.context.WebApplicationContext;
 import org.hamcrest.core.IsNull;
 
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,18 +43,22 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@RecordApplicationEvents
 @SpringBootTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ActiveProfiles("localmysql")
+@ActiveProfiles("test")
+//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+//@ActiveProfiles("localmysql")
 class BeerControllerIT {
+
+    @Autowired
+    ApplicationEvents applicationEvents;
 
     @Autowired
     BeerController beerController;
@@ -72,6 +82,27 @@ class BeerControllerIT {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac)
                 .apply(springSecurity())
                 .build();
+    }
+
+    @Test
+    void testCreateBeerMVC() throws Exception {
+        val beerDTO = BeerDTO.builder()
+                .beerName("new beer")
+                .beerStyle(BeerStyle.IPA)
+                .upc("123413")
+                .price(BigDecimal.TEN)
+                .quantityOnHand(3)
+                .build();
+
+        mockMvc.perform(post(BeerController.BEER_PATH)
+                .with(BeerControllerTest.jwtRequestPostProcessor)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(beerDTO)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        Assertions.assertEquals(1,applicationEvents.stream(BeerCreatedEvent.class).count());
     }
 
 
