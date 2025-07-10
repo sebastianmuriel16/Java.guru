@@ -1,10 +1,8 @@
 package course.spring.spring_6_rest_mvc.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Min;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,6 +17,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 public class BeerOrderLine {
 
@@ -41,7 +40,8 @@ public class BeerOrderLine {
 
     public  boolean isNew() {return this.id == null;}
 
-    private Integer orderQuantity = 0;
+    @Min(value = 1, message = "Order Quantity must be greater than 0")
+    private Integer orderQuantity = 1;
     private Integer quantityAllocated = 0;
 
     @ManyToOne
