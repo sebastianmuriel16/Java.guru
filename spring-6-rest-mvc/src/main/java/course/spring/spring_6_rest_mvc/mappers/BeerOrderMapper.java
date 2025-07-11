@@ -25,6 +25,6 @@ public interface BeerOrderMapper {
 
     BeerOrder beerOrderDtoToBeerOrder(BeerOrderDTO beerOrderDTO);
 
-    BeerOrderDTO beerOrderToBeerOrder(BeerOrder beerOrder);
+    BeerOrderDTO beerOrderToBeerOrderDto(BeerOrder beerOrder);
 
 }

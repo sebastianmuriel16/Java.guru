@@ -2,6 +2,7 @@ package course.spring.spring_6_rest_mvc.boostrap;
 
 
 
+import course.spring.spring_6_rest_mvc.repositories.BeerOrderRepository;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 import course.spring.spring_6_rest_mvc.repositories.CustomerRepository;
 import course.spring.spring_6_rest_mvc.services.BeerCsvService;
@@ -31,11 +32,14 @@ class BootstrapDataTest {
     @Autowired
     BeerCsvService csvService;
 
+    @Autowired
+    BeerOrderRepository beerOrderRepository;
+
     BoostrapData bootstrapData;
 
     @BeforeEach
     void setUp() {
-        bootstrapData = new BoostrapData(beerRepository, customerRepository, csvService);
+        bootstrapData = new BoostrapData(beerRepository, customerRepository,beerOrderRepository,csvService);
     }
 
     @Test
