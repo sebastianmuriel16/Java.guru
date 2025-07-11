@@ -1,14 +1,15 @@
 package course.spring.spring_6_rest_mvc.controller;
 
+import course.spring.spring_6_rest_mvc.entities.BeerOrder;
+import course.spring.spring_6_rest_mvc.model.BeerOrderCreateDTO;
 import course.spring.spring_6_rest_mvc.model.BeerOrderDTO;
 import course.spring.spring_6_rest_mvc.services.BeerOrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,6 +20,16 @@ public class BeerOrderController {
     public static final String BEER_ORDER_PATH = "/api/v1/beerorder";
     public static final String BEER_ORDER_PATH_ID = BEER_ORDER_PATH + "/{beerOrderId}";
     private final BeerOrderService beerOrderService;
+
+
+
+    @PostMapping(BEER_ORDER_PATH)
+    public ResponseEntity<Void> createOrder(@RequestBody BeerOrderCreateDTO beerOrderCreateDTO){
+        BeerOrder savedOrder = beerOrderService.createOrder(beerOrderCreateDTO);
+
+        return ResponseEntity.created(URI.create(BEER_ORDER_PATH + "/" + savedOrder.getId().toString()))
+                .build();
+    }
 
     @GetMapping(BEER_ORDER_PATH)
     public Page<BeerOrderDTO> listBeerOrders(@RequestParam(required = false) Integer pageNumber,

@@ -1,5 +1,7 @@
 package course.spring.spring_6_rest_mvc.services;
 
+import course.spring.spring_6_rest_mvc.entities.BeerOrder;
+import course.spring.spring_6_rest_mvc.model.BeerOrderCreateDTO;
 import course.spring.spring_6_rest_mvc.model.BeerOrderDTO;
 import org.springframework.data.domain.Page;
 
@@ -11,5 +13,7 @@ public interface BeerOrderService {
     Page<BeerOrderDTO> listOrders(Integer pageNumber, Integer pageSize);
 
     Optional<BeerOrderDTO> getBeerOrderById(UUID beerOrderId);
+
+    BeerOrder createOrder(BeerOrderCreateDTO beerOrderCreateDTO);
 
 }
