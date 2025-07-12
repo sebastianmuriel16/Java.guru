@@ -3,6 +3,7 @@ package course.spring.spring_6_rest_mvc.controller;
 import course.spring.spring_6_rest_mvc.entities.BeerOrder;
 import course.spring.spring_6_rest_mvc.model.BeerOrderCreateDTO;
 import course.spring.spring_6_rest_mvc.model.BeerOrderDTO;
+import course.spring.spring_6_rest_mvc.model.BeerOrderUpdateDTO;
 import course.spring.spring_6_rest_mvc.services.BeerOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,16 @@ public class BeerOrderController {
     public static final String BEER_ORDER_PATH_ID = BEER_ORDER_PATH + "/{beerOrderId}";
     private final BeerOrderService beerOrderService;
 
+    @DeleteMapping(BEER_ORDER_PATH_ID)
+    public ResponseEntity<Void> deleteOrder(@PathVariable UUID beerOrderId){
+        beerOrderService.deleteOrder(beerOrderId);
+        return  ResponseEntity.noContent().build();
+    }
 
+    @PutMapping(BEER_ORDER_PATH_ID)
+    public ResponseEntity<BeerOrderDTO> updateOrder(@PathVariable UUID beerOrderId, @RequestBody BeerOrderUpdateDTO beerOrderUpdateDTO){
+        return ResponseEntity.ok(beerOrderService.updateOrder(beerOrderId,beerOrderUpdateDTO));
+    }
 
     @PostMapping(BEER_ORDER_PATH)
     public ResponseEntity<Void> createOrder(@RequestBody BeerOrderCreateDTO beerOrderCreateDTO){
