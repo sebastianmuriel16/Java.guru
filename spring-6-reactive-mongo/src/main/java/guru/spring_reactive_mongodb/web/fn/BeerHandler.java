@@ -74,7 +74,7 @@ public class BeerHandler {
                 .ok()
                 .body(beerService.getById(request.pathVariable("beerId"))
                          .switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND)))
-                        ,BeerDTO.class);
+                        ,BeerDTO.class) ;
 
     }
 
