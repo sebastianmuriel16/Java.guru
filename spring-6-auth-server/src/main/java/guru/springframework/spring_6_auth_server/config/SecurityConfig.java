@@ -151,7 +151,7 @@ public class SecurityConfig {
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder()
                 // el .issuer en este caso es para que se emita el jwt desde auth-server al crear la imagen de docker
-//                .issuer("http://auth-server:9000")
+                .issuer("http://localhost:9000")
                 .build();
     }
 
