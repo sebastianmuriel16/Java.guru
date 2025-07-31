@@ -1,6 +1,5 @@
 package course.spring.spring_6_rest_mvc.controller;
 
-import course.spring.spring_6_rest_mvc.model.CustomerDTO;
 import course.spring.spring_6_rest_mvc.services.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;

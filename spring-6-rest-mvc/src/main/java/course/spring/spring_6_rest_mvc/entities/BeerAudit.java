@@ -1,7 +1,6 @@
 package course.spring.spring_6_rest_mvc.entities;
 
 
-import course.spring.spring_6_rest_mvc.model.BeerStyle;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

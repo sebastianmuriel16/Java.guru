@@ -1,9 +1,6 @@
 package course.spring.spring_6_rest_mvc.controller;
 
 import course.spring.spring_6_rest_mvc.entities.BeerOrder;
-import course.spring.spring_6_rest_mvc.model.BeerOrderCreateDTO;
-import course.spring.spring_6_rest_mvc.model.BeerOrderDTO;
-import course.spring.spring_6_rest_mvc.model.BeerOrderUpdateDTO;
 import course.spring.spring_6_rest_mvc.services.BeerOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
 import java.net.URI;
-import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor

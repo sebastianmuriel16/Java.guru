@@ -1,6 +1,5 @@
 package course.spring.spring_6_rest_mvc.entities;
 
-import course.spring.spring_6_rest_mvc.model.BeerOrderLineStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;

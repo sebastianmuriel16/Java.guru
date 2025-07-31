@@ -2,7 +2,6 @@ package course.spring.spring_6_rest_mvc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course.spring.spring_6_rest_mvc.config.SpringSecConfig;
-import course.spring.spring_6_rest_mvc.model.CustomerDTO;
 import course.spring.spring_6_rest_mvc.services.CustomerService;
 import course.spring.spring_6_rest_mvc.services.CustomerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,7 +27,6 @@ import static org.mockito.ArgumentMatchers.any;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 

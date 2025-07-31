@@ -1,6 +1,5 @@
 package course.spring.spring_6_rest_mvc.entities;
 
-import course.spring.spring_6_rest_mvc.model.BeerStyle;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

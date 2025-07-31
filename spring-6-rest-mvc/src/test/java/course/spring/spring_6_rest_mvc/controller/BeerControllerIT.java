@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import course.spring.spring_6_rest_mvc.entities.Beer;
 import course.spring.spring_6_rest_mvc.events.BeerCreatedEvent;
 import course.spring.spring_6_rest_mvc.mappers.BeerMapper;
-import course.spring.spring_6_rest_mvc.model.BeerDTO;
-import course.spring.spring_6_rest_mvc.model.BeerStyle;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 import jakarta.transaction.Transactional;
 import lombok.val;
@@ -13,7 +11,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.hamcrest.core.Is.is;
@@ -35,13 +32,9 @@ import org.hamcrest.core.IsNull;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;

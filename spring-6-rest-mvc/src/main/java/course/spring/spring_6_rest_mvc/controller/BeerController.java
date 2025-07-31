@@ -1,7 +1,5 @@
 package course.spring.spring_6_rest_mvc.controller;
 
-import course.spring.spring_6_rest_mvc.model.BeerDTO;
-import course.spring.spring_6_rest_mvc.model.BeerStyle;
 import course.spring.spring_6_rest_mvc.services.BeerService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

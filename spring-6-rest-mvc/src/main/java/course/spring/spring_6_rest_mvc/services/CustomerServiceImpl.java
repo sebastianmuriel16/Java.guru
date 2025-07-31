@@ -1,6 +1,5 @@
 package course.spring.spring_6_rest_mvc.services;
 
-import course.spring.spring_6_rest_mvc.model.CustomerDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 

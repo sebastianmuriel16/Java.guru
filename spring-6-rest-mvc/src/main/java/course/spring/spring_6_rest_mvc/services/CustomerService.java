@@ -1,7 +1,5 @@
 package course.spring.spring_6_rest_mvc.services;
 
-import course.spring.spring_6_rest_mvc.model.CustomerDTO;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

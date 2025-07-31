@@ -1,14 +1,11 @@
 package course.spring.spring_6_rest_mvc.services;
 
 import course.spring.spring_6_rest_mvc.mappers.CustomerMapper;
-import course.spring.spring_6_rest_mvc.model.BeerDTO;
-import course.spring.spring_6_rest_mvc.model.CustomerDTO;
 import course.spring.spring_6_rest_mvc.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

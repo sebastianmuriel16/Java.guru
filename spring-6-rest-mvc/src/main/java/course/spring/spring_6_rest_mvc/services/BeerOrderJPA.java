@@ -6,10 +6,6 @@ import course.spring.spring_6_rest_mvc.entities.BeerOrderLine;
 import course.spring.spring_6_rest_mvc.entities.BeerOrderShipment;
 import course.spring.spring_6_rest_mvc.entities.Customer;
 import course.spring.spring_6_rest_mvc.mappers.BeerOrderMapper;
-import course.spring.spring_6_rest_mvc.model.BeerOrderCreateDTO;
-import course.spring.spring_6_rest_mvc.model.BeerOrderDTO;
-import course.spring.spring_6_rest_mvc.model.BeerOrderLineDTO;
-import course.spring.spring_6_rest_mvc.model.BeerOrderUpdateDTO;
 import course.spring.spring_6_rest_mvc.repositories.BeerOrderRepository;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 import course.spring.spring_6_rest_mvc.repositories.CustomerRepository;
@@ -18,7 +14,6 @@ import lombok.val;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;

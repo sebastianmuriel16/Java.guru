@@ -2,7 +2,6 @@ package course.spring.spring_6_rest_mvc.controller;
 
 import course.spring.spring_6_rest_mvc.entities.Customer;
 import course.spring.spring_6_rest_mvc.mappers.CustomerMapper;
-import course.spring.spring_6_rest_mvc.model.CustomerDTO;
 import course.spring.spring_6_rest_mvc.repositories.CustomerRepository;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;

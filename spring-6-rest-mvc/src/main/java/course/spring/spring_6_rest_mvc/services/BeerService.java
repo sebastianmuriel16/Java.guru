@@ -2,8 +2,7 @@ package course.spring.spring_6_rest_mvc.services;
 
 import java.util.Optional;
 import java.util.UUID;
-import course.spring.spring_6_rest_mvc.model.BeerDTO;
-import course.spring.spring_6_rest_mvc.model.BeerStyle;
+
 import org.springframework.data.domain.Page;
 
 public interface BeerService {

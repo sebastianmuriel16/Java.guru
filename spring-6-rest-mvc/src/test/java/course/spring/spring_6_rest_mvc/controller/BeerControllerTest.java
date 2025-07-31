@@ -2,7 +2,6 @@ package course.spring.spring_6_rest_mvc.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import course.spring.spring_6_rest_mvc.config.SpringSecConfig;
-import course.spring.spring_6_rest_mvc.model.BeerDTO;
 import course.spring.spring_6_rest_mvc.services.BeerService;
 import course.spring.spring_6_rest_mvc.services.BeerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,7 +31,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.mockito.Mockito.verify;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
