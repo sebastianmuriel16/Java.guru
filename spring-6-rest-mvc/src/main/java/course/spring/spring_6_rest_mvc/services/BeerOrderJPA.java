@@ -14,6 +14,7 @@ import guru.springframework.spring6restmvcapi.model.BeerOrderDTO;
 import guru.springframework.spring6restmvcapi.model.BeerOrderUpdateDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,6 +33,7 @@ public class BeerOrderJPA implements BeerOrderService{
     private final BeerOrderMapper beerOrderMapper;
     private final CustomerRepository customerRepository;
     private final BeerRepository beerRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     private static final int DEFAULT_PAGE=0;
     private static final int DEFAULT_PAGE_SIZE = 25;
@@ -132,6 +134,8 @@ public class BeerOrderJPA implements BeerOrderService{
                 order.getBeerOrderShipment().setTrackingNumber(beerOrderUpdateDTO.getBeerOrderShipment().getTrackingNumber());
             }
         }
+
+        if(beerOrderUpdateDTO.get)
 
         return beerOrderMapper.beerOrderToBeerOrderDto(beerOrderRepository.save(order));
 
