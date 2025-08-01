@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import course.spring.spring_6_rest_mvc.config.SpringSecConfig;
 import course.spring.spring_6_rest_mvc.services.CustomerService;
 import course.spring.spring_6_rest_mvc.services.CustomerServiceImpl;
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

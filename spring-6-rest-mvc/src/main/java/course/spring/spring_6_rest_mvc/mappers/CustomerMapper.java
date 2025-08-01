@@ -2,6 +2,7 @@ package course.spring.spring_6_rest_mvc.mappers;
 
 
 import course.spring.spring_6_rest_mvc.entities.Customer;
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

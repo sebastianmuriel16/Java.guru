@@ -2,6 +2,7 @@ package course.spring.spring_6_rest_mvc.services;
 
 import course.spring.spring_6_rest_mvc.mappers.CustomerMapper;
 import course.spring.spring_6_rest_mvc.repositories.CustomerRepository;
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.CacheManager;

@@ -1,6 +1,7 @@
 package course.spring.spring_6_rest_mvc.controller;
 
 import course.spring.spring_6_rest_mvc.services.CustomerService;
+import guru.springframework.spring6restmvcapi.model.CustomerDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

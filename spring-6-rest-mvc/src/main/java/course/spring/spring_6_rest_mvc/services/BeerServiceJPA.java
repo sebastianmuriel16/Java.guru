@@ -5,6 +5,8 @@ import course.spring.spring_6_rest_mvc.events.BeerCreatedEvent;
 import course.spring.spring_6_rest_mvc.mappers.BeerMapper;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -67,7 +69,7 @@ public class BeerServiceJPA implements BeerService {
         return beerRepository.findByBeerNameContainingIgnoreCase(beerName, pageable);
     }
 
-    Page<Beer> listBeersByStyle(BeerStyle beerStyle,Pageable pageable){
+    Page<Beer> listBeersByStyle(BeerStyle beerStyle, Pageable pageable){
         return beerRepository.findAllByBeerStyle(beerStyle, pageable);
     }
 

@@ -5,6 +5,8 @@ import course.spring.spring_6_rest_mvc.entities.Beer;
 import course.spring.spring_6_rest_mvc.events.BeerCreatedEvent;
 import course.spring.spring_6_rest_mvc.mappers.BeerMapper;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import jakarta.transaction.Transactional;
 import lombok.val;
 import org.junit.jupiter.api.Assertions;

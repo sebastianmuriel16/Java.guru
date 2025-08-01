@@ -3,6 +3,8 @@ package course.spring.spring_6_rest_mvc.services;
 import java.util.Optional;
 import java.util.UUID;
 
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import org.springframework.data.domain.Page;
 
 public interface BeerService {

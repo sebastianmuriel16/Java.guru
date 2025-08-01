@@ -1,6 +1,7 @@
 package course.spring.spring_6_rest_mvc.repositories;
 
 import course.spring.spring_6_rest_mvc.entities.Beer;
+import guru.springframework.spring6restmvcapi.model.BeerStyle;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ class BeerRepositoryTest {
 
     @Test
     void testGetBeerListByNameAndBeerStyle(){
-        Page<Beer> list = beerRepository.findByBeerNameContainingIgnoreCaseAndBeerStyle("IPA",BeerStyle.IPA, null);
+        Page<Beer> list = beerRepository.findByBeerNameContainingIgnoreCaseAndBeerStyle("IPA", BeerStyle.IPA, null);
 
         assertThat(list.getContent().size()).isEqualTo(311);
     }

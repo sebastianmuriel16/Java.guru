@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import course.spring.spring_6_rest_mvc.config.SpringSecConfig;
 import course.spring.spring_6_rest_mvc.services.BeerService;
 import course.spring.spring_6_rest_mvc.services.BeerServiceImpl;
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

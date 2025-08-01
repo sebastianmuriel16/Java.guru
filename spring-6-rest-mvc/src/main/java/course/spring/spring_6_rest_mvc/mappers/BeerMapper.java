@@ -2,6 +2,7 @@ package course.spring.spring_6_rest_mvc.mappers;
 
 import course.spring.spring_6_rest_mvc.entities.Beer;
 import course.spring.spring_6_rest_mvc.entities.BeerAudit;
+import guru.springframework.spring6restmvcapi.model.BeerDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
