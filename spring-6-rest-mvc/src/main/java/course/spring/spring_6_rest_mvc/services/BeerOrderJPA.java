@@ -9,6 +9,7 @@ import course.spring.spring_6_rest_mvc.mappers.BeerOrderMapper;
 import course.spring.spring_6_rest_mvc.repositories.BeerOrderRepository;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 import course.spring.spring_6_rest_mvc.repositories.CustomerRepository;
+import guru.springframework.spring6restmvcapi.events.OrderPlaceEvent;
 import guru.springframework.spring6restmvcapi.model.BeerOrderCreateDTO;
 import guru.springframework.spring6restmvcapi.model.BeerOrderDTO;
 import guru.springframework.spring6restmvcapi.model.BeerOrderUpdateDTO;
@@ -135,9 +136,14 @@ public class BeerOrderJPA implements BeerOrderService{
             }
         }
 
-        if(beerOrderUpdateDTO.get)
+        BeerOrderDTO dto = beerOrderMapper.beerOrderToBeerOrderDto(beerOrderRepository.save(order));
 
-        return beerOrderMapper.beerOrderToBeerOrderDto(beerOrderRepository.save(order));
+        if(beerOrderUpdateDTO.getPaymentAmount() !=null){
+            applicationEventPublisher.publishEvent(OrderPlaceEvent.builder()
+                    .beerOrderDTO(dto));
+        }
+
+        return dto;
 
     }
 

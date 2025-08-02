@@ -5,6 +5,7 @@ import course.spring.spring_6_rest_mvc.model.*;
 import course.spring.spring_6_rest_mvc.repositories.BeerOrderRepository;
 import course.spring.spring_6_rest_mvc.repositories.BeerRepository;
 import course.spring.spring_6_rest_mvc.repositories.CustomerRepository;
+import guru.springframework.spring6restmvcapi.model.*;
 import jakarta.transaction.Transactional;
 import lombok.Builder;
 import lombok.val;
