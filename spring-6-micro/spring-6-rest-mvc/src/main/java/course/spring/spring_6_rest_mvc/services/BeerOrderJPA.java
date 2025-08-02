@@ -14,6 +14,7 @@ import guru.springframework.spring6restmvcapi.model.BeerOrderCreateDTO;
 import guru.springframework.spring6restmvcapi.model.BeerOrderDTO;
 import guru.springframework.spring6restmvcapi.model.BeerOrderUpdateDTO;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Primary;
@@ -25,6 +26,8 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+
+@Slf4j
 @Service
 @Primary
 @RequiredArgsConstructor
@@ -138,7 +141,10 @@ public class BeerOrderJPA implements BeerOrderService{
 
         BeerOrderDTO dto = beerOrderMapper.beerOrderToBeerOrderDto(beerOrderRepository.save(order));
 
+        log.debug("Payment Amount: " + beerOrderUpdateDTO.getPaymentAmount());
+
         if(beerOrderUpdateDTO.getPaymentAmount() !=null){
+            log.debug("Sending order update event for order id: " + beerOrderId);
             applicationEventPublisher.publishEvent(OrderPlaceEvent.builder()
                     .beerOrderDTO(dto));
         }

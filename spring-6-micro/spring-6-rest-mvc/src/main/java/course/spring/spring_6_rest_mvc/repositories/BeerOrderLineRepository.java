@@ -1,0 +1,11 @@
+package course.spring.spring_6_rest_mvc.repositories;
+
+import course.spring.spring_6_rest_mvc.entities.BeerOrderLine;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.UUID;
+
+public interface BeerOrderLineRepository extends JpaRepository<BeerOrderLine, UUID> {
+
+
+}
