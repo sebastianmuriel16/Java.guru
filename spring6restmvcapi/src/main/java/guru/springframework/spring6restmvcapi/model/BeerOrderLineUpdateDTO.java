@@ -23,5 +23,5 @@ public class BeerOrderLineUpdateDTO {
     @Min(value = 1, message = "Order Quantity must be greater than 0")
     private Integer orderQuantity;
 
-    private Integer quantityAllocated;
+    private Integer quantityAllocated;  
 }
