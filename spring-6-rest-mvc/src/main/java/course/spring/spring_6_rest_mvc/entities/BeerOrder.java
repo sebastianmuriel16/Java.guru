@@ -1,5 +1,6 @@
 package course.spring.spring_6_rest_mvc.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;

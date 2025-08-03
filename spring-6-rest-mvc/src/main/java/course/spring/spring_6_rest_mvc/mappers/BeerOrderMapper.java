@@ -21,10 +21,18 @@ public interface BeerOrderMapper {
     @Mapping(target = "beerOrder",ignore = true)
     BeerOrderLine beerOrderLineDtoToBeerOrderLine(BeerOrderLineDTO beerOrderLineDTO);
 
+
     BeerOrderLineDTO beerOrderLineToBeerOrderLineDTO(BeerOrderLine beerOrderLine);
 
+    @Mapping(target = "beerOrderLines", source = "beerOrderLines")
+    @Mapping(target = "beerOrderShipment", source = "beerOrderShipment")
+    @Mapping(target = "paymentAmount", source = "paymentAmount")
     BeerOrder beerOrderDtoToBeerOrder(BeerOrderDTO beerOrderDTO);
 
+
+    @Mapping(target = "beerOrderLines", source = "beerOrderLines")
+    @Mapping(target = "beerOrderShipment", source = "beerOrderShipment")
+    @Mapping(target = "paymentAmount", source = "paymentAmount")
     BeerOrderDTO beerOrderToBeerOrderDto(BeerOrder beerOrder);
 
 }

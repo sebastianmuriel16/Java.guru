@@ -1,9 +1,6 @@
 package course.spring.spring_6_rest_mvc.model;
 
-import course.spring.spring_6_rest_mvc.entities.BeerOrderLine;
-import course.spring.spring_6_rest_mvc.entities.BeerOrderShipment;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+
 import lombok.Builder;
 import lombok.Data;
 
